@@ -117,11 +117,9 @@ c	The average length and diameter of partciles
 c	aLav>d for rods (prolate particles) and aLav<d for disks (oblate particles)
 	read(14,*) refm1,refm2,NRefm
 c	Real and Imag part of refmed if Nrefm=0. 
-c	If Nrefm=1,2,3 ext. med. is  P3HT, PMMA, water, respectively 
-c	For a specific external medium, replace P3HT or PMMA subriutines with user-defined code
-C     for example, after label 765 one can calculate the refractive index of water
-c      W2=WAVEL*WAVEL
-c      REFMED=1.32334d0+3.479d+03/W2-5.111d+07/W2/W2
+c	If Nrefm=1,2,3 ext. med. is  P3HT, PMMA, and water, respectively 
+c	For a specific external medium, replace P3HT or PMMA subroutine with your one
+C          
 	read(14,*) KD, KS, As
 c	KD and As are parameters for size-coorection of the particle refreactive index
 c	if KS=0 the TS set by Olmon et al. is used
@@ -132,19 +130,20 @@ c	wavelength range and step
 	read(14,*) NeedFij
 c	if NeedFif=0 Fij is not calculated
       read(14,*) Nshape,Nmetal,NAu
-c	Nshape=1,2,3,4 four particle shape. Note, for Nshape=4 only prolate particles are considered
+c	Nshape=1,2,3,4 four particle shape are specified. 
+c	Note, for Nshape=4 only prolate particles are considered in this version
 c	if NAu=1 or 2 the Olmon or g34JCH3 splines are used, respectively 
 	read(14,*) par_c,par_hi
 c	The shape parameters for Nshape=4 case
 c     For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317–6323
       read(14,*) Norient,Ntheta
-c	Norien is the number of orientation points for Fij averaging
-c	Ntheta is the naumber of angles between k and the symmatery axis
+c	Norient is the number of orientation points for Fij averaging
+c	Ntheta is the number of angles between k and the symmetry axis
 c	for calculating the integral cross-sections for TE and TM polarizations
 	read(14,*) Bet_beg,Bet_end,Bet_step 
 c	The range of scattering angles and step for Fij matrix
       read(14,*) N,Mmax
-c	The T-matrix order and Nmax order for calculationg light scattering parameters
+c	The T-matrix order and Nmax order for calculating light scattering parameters
 	read(14,*) ERR_Q, ERR_Aij
 c	error parameters for the efficiencies and the amplitude matrix
       read(14,*) NGauss
@@ -231,7 +230,7 @@ c		x=b/R  p=a/b  z=p*x  R=[a**2+(b1-b)**2]/[2*(b1-b)]
 1123		continue
 c---------------------------------------------------------
 c****************
-C	The effective electron acattering length is defined with a0=Rev and As parameter:
+C	The effective electron scattering length is defined with a0=Rev and As parameter:
 	aLeff=a0/As
 c*****************	
 C--------------------------------------------------------------
@@ -302,7 +301,7 @@ C--------------------------------------------------------------------
 	  AL=AL0*REFMED
 C--------------------------------------------------------------   end
 c	Calculation of ALL T0 and Tm matrices for given N and Mmax
-c	The particle parameters are specified by Al, EPSILN, Nshape, and Refm
+c	The particle parameters are specified by Al, EPSILN, Nshape, par_c,par_hi, and Refm
 c	The otuput matrices are saved in TE_0,TM_0, TE_m and TM_m one-dimensional arrays
 c
         call qT(AL,EPSILN,Nshape,par_c,par_hi,REFM,Mmax,N,NGauss)
@@ -325,7 +324,7 @@ c333   end do
 C--------------------------------------------------------------------
 
 c	Calculation of Qext,sca,abs for random orientations
-c     and for TE,TM polarizations with respect\
+c     and for TE,TM polarizations with respect
 c      to the plane (symmetry axis, k). Theta is the angle between
 c	the symmetry axis and the plane wave vector k.
 c	Define Theta angles for given Ntheta
@@ -370,9 +369,6 @@ c	Print the output quantities
 991    format(/1x,f6.1,3(2x,e11.6),2x,'Random')
 992    format(1x,f6.1,3(2x,e11.6),2x,f4.1,2x,'TE')
 993    format(1x,f6.1,3(2x,e11.6),2x,f4.1,2x,'TM')
-
-
-
 
 994		continue
 	if (i_th.lt.Ntheta) then
@@ -697,7 +693,7 @@ c------------------------------------------------------------
 c------------------------------------------------------------ 
         CALL qGAU(NGauss)
 C------------------------------------------------------------
-c	Set all initialindexes to be equal zero for
+c	Set all initial indexes to be equal zero for
 c    arrays TE0(I0), TM0(I0) and TE_m(Im),TM_m(Im)
 	I0=0
 	Im=0
@@ -904,28 +900,28 @@ C------------------------------------------------------------
 	  qz=Z
         CALL qQSM(M,NM,qz)
 C------------------------------------------------------------
-c      We consider an axilly symmetrical particle (a,b,b)
+c      We consider an axially symmetrical particle (a,b,b)
 c  Nshape=1  spheroid: length aL=2*a, thickness d=2*b
-c            semiaxis (a,b,b), a is rotation axis
+c            semiaxes (a,b,b), a is rotation axis
 c		   eqivolume radius = b*(a/b)**(1/3)
 c            axis ratio e=a/b (<1 or >1), epsiln=b/a (>1 or <1)
 c
 c  Nshape=2  right circular cylinder
-c            length aL= 2a, and thickness d=2*b (rotation axis), 
-c            axis ratio e=a/b (<1 or >1), epsiln = (b/a >1 or <1
-c		   eqivolume radius = b*[(3a/2b)]**(1/3)
+c            length aL= 2a, and diameter d=2*b, the rotation axis is 2a, 
+c            the aspect ratio e=a/b (<1 or >1), epsiln = (b/a >1 or <1
+c		   the eqivolume radius = b*[(3a/2b)]**(1/3)
 c
 c  Nshape=3  PROLATE s-cylinder with semi-spherical ends,
 c            total length aL= 2a (rotation axis),total thickness d=2*b
 c            Equivolume radius = b*(1+3(a-b)/2b)**1/3,
 c            axis ratio e=a/b>1, epsiln = b/a<1
 c
-c            OBLATE s-cylinder with length L=2a (rotation axis)
-c            radius of rotation is  b, thickness d=2*b
+c            OBLATE s-cylinder with thickness is L=2a (rotation axis)
+c            radius of rotation is  b, the total diameter d=2*b
 c            equivolume radius = a[1+(3/2)*((b-a)/a)**2+(3*pi/4)*((b-a)/a)]**1/3
 c            axis ratio e=a/b<1, epsiln=b/a>1
 c  Nshape=4  Dog-bone rods with elliptical caps
-c		   Four parameters have to be defeined:
+c		   Four parameters have to be defined:
 c			Total length L=2(a+b_c)
 c			Cental thickness d=2*b 
 
