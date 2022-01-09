@@ -1,29 +1,28 @@
 # T-matrix-abs-host
 FORTRAN T-matrix code for particles in absorbing media, dielectric hosts are available
-C|                 Program       qCQ-3  (NGauss<=192)            |
-C|                                                                  |
-C|  This code is an extended precision version of CQ-3.for 
-c   with double precision T-matrix calculations
-c
-C   Calculation of the light scattering cross sections Qext,sca,abs
-c   for randomly oriented MONODISPERSE particles (rods and disks)
-c   In addition, the orientation averaged Scattering matrix Fij(beta_sca)
-c   and derivative parameters Ivv, Itot, Ivh/Ivv are calculated at a wixed wavelength
-c   for Deatails see Khlebtsov, JQSRT, 2022.	
-c   In addition to orientation-averaged cross sections,
-c   Qext,sca,abs(theta) , and the forward scattering amplitudes
-c    A11(0)=A1, A22(0)=A2   are calculated for TE and TM
-c   polarizations of the incident wave with respect to the plane
-c   (a_sym;k) where a_sym is the symmetry axis, k is the inc. wave vector
-c   for different orientation angles theta : cos (theta)=(a*k)/|a||k|
-c   
-c   The Mueller matrix is calculated in (S) and (L) representations
-c
-c   The Stokes parameters are defined by     
-C|  (Il,Ir,U,V)   (U,V)   Bohren and Huffman book  
-C|  Il=El(El*),Ir=Er(Er*),Q=ElEl* + ErEr*;U=Re[El(Er*)+Er(El*)  |
-C|  V=Im[El(Er*)-Er(El*)]; where indexes r,l correspond to perpendicular
-c   and parallel directions with respect to the reference palne (Hulst)
+Program       qCQ-3  (NGauss<=192)
+
+This code is an extended precision version of CQ-3.for 
+with double precision T-matrix calculations
+Calculation of the light scattering cross sections Qext,sca,abs
+for randomly oriented MONODISPERSE particles (rods and disks)
+In addition, the orientation averaged Scattering matrix Fij(beta_sca)
+and derivative parameters Ivv, Itot, Ivh/Ivv are calculated at a wixed wavelength
+for details see Khlebtsov, JQSRT, 2022.	
+In addition to orientation-averaged cross sections,
+Qext,sca,abs(theta) , and the forward scattering amplitudes
+A11(0)=A1, A22(0)=A2   are calculated for TE and TM
+polarizations of the incident wave with respect to the plane
+(a_sym;k) where a_sym is the symmetry axis, k is the inc. wave vector
+for different orientation angles theta : cos (theta)=(a*k)/|a||k|
+  
+The Mueller matrix is calculated in (S) and (L) representations
+The Stokes parameters are defined by     
+(Il,Ir,U,V)   (U,V)   Bohren and Huffman book  
+Il=El(El*),Ir=Er(Er*),Q=ElEl* + ErEr*;U=Re[El(Er*)+Er(El*)
+V=Im[El(Er*)-Er(El*)];
+where indexes r,l correspond to perpendicular
+and parallel directions with respect to the reference palne (Hulst)
 c   Vectors :(k;s)=ErxEl is defined as in Bohren and Huffman book.
 c 
 C  The signs of final amplitudes Aij and A1,A2 are changed according to 
