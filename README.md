@@ -28,7 +28,7 @@ c   Vectors :(k;s)=ErxEl is defined as in Bohren and Huffman book.
 c 
 C  The signs of final amplitudes Aij and A1,A2 are changed according to 
 c  Mishchenko (2000) book definition
-C|==================================================================|
+C
 C|  complex AL = (2*pi/lambda(in vacuum)*Rev*refmed                 |
 c***********************************************************
 c      Four particle shapes are considered:
@@ -62,7 +62,7 @@ c             where d_aver=(d+d1)/2  is the AVERAGED diameter
 c			For calculations we have used also
 c             epsiln=1/e e=q/b=L/d d=2b is the CENTRAL diameter
 c	        For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317–6323
-c	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c	!!!!!!!!!
 c             NOTE1: par_hi must be less than 0.5
 c			NOTE2: if Nshape=3 par_c and par_hi will be used incorrectly
 c			Use Nshape=4 (!) for par_c<=1 and par_hi<=0.5 !!!!!!!!	
