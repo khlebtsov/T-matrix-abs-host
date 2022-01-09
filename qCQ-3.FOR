@@ -8,7 +8,7 @@ C   Calculation of the light scattering cross sections Qext,sca,abs
 c   for randomly oriented MONODISPERSE particles (rods and disks)
 c   In addition, the orientation averaged Scattering matrix Fij(beta_sca)
 c   and derivative parameters Ivv, Itot, Ivh/Ivv are calculated at a wixed wavelength
-c   for Deatails see Khlebtsov, JQSRT, 2022.	
+c   for Details see Khlebtsov, JQSRT, 2022.	
 c   In addition to orientation-averaged cross sections,
 c   Qext,sca,abs(theta) , and the forward scattering amplitudes
 c    A11(0)=A1, A22(0)=A2   are calculated for TE and TM
