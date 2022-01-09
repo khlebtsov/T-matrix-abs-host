@@ -1,14 +1,13 @@
 c
 C|                 Program       qCQ-3   (NGauss max=768)          
 C|                                                                  
-C|  This code is an double pecision version of qCQ-3.for 
-c   
+C|  This code is an double precision version of qCQ-3.for 
 c
 C   Calculation of the light scattering cross sections Qext,sca,abs
 c   for randomly oriented MONODISPERSE particles (rods and disks)
 c   In addition, the orientation averaged Scattering matrix Fij(beta_sca)
 c   and derivative parameters Ivv, Itot, Ivh/Ivv are calculated at a wixed wavelength
-c   for Deatails see Khlebtsov, JQSRT, 2022.	
+c   for Details see Khlebtsov, JQSRT, 2022.	
 c   In addition to orientation-averaged cross sections,
 c   Qext,sca,abs(theta) , and the forward scattering amplitudes
 c    A11(0)=A1, A22(0)=A2   are calculated for TE and TM
@@ -66,8 +65,9 @@ c             NOTE1: par_hi must be less than 0.5
 c			NOTE2: if Nshape=3 par_c and par_hi will be used incorrectly
 c			Use Nshape=4 (!) for par_c<=1 and par_hi<=0.5 !!!!!!!!	
 c
-c			FNOTE 3: in this version, Nshape=4 works only for dog-bone rods
-c			Nshape=4 should not be used for disks !!!!	
+c			FNOTE 3: in this version, Nshape=4 works only for dog-bone rods	
+c************************************************************************	
+c   
 C|==================================================================
 
 	IMPLICIT REAL*8(A-H,O-Z)
@@ -128,8 +128,7 @@ C	if Nrefm=3 the external mediun is nonabsorbing water:
 c      W2=WAVEL*WAVEL
 c      REFMED=1.32334d0+3.479d+03/W2-5.111d+07/W2/W2
 C 
-c	For a specific external medium, replace P3HT or PMMA subriutines with user-defined code
-C     for example, after label 765 one can calculate the refractive index of water
+c	For a specific external medium, replace P3HT or PMMA subriutine with your one 
 C
 	read(14,*) KD, KS, As
 c	KD and As are parameters for size-coorection of the particle refreactive index
@@ -147,13 +146,13 @@ c	if NAu=1 or 2 the Olmon or g34JCH3 splines are used, respectively
 c	The shape parameters for Nshape=4 case
 c     For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317–6323
       read(14,*) Norient,Ntheta
-c	Norien is the number of orientation points for Fij averaging
-c	Ntheta is the naumber of angles between k and the symmatery axis
+c	Norient is the number of orientation points for Fij averaging
+c	Ntheta is the naumber of angles between k and the symmetry axis
 c	for calculating the integral cross-sections for TE and TM polarizations
 	read(14,*) Bet_beg,Bet_end,Bet_step 
 c	The range of scattering angles and step for Fij matrix
       read(14,*) N,Mmax
-c	The T-matrix order and Nmax order for calculationg light scattering parameters
+c	The T-matrix order and Nmax order for calculating light scattering parameters
 	read(14,*) ERR_Q, ERR_Aij
 c	error parameters for the efficiencies and the amplitude matrix
       read(14,*) NGauss
@@ -309,12 +308,11 @@ c	Nmetal=0 Ag
 	end if
 
 C--------------------------------------------------------------------
-c        REFM=m2/REFMED
 
 c	write(16,*)refm
 	  AL0=2.d0*pi*a0/wavel	  
 	  AL=AL0*REFMED
-C--------------------------------------------------------------   end
+C--------------------------------------------------------------   
 c	Calculation of ALL T0 and Tm matrices for given N and Mmax
 c	The particle parameters are specified by Al, EPSILN, Nshape, and Refm
 c	The otuput matrices are saved in TE_0,TM_0, TE_m and TM_m one-dimensional arrays
@@ -338,9 +336,9 @@ c333   end do
 C--------------------------------------------------------------------
 
 c	Calculation of Qext,sca,abs for random orientations
-c     and for TE,TM polarizations with respect\
-c      to the plane (symmetry axis, k). Theta is the angle between
-c	the symmetry axis and the plane wave vector k.
+c     and for TE,TM polarizations with respect
+c      to the refernce plane (symmetry axis, k). Theta is the angle between
+c	the symmetry axis and the wave vector k.
 c	Define Theta angles for given Ntheta
        i_th=0
 1122         if(Ntheta.eq.0) then
@@ -352,7 +350,7 @@ c	Define Theta angles for given Ntheta
 	Z=dcos(theta*pi/180.d0)
 c	Calculate A1(0), A2(0) light scattering amplitudes for 
 c	TE [E perp. (a,k)] and TM [E parallel (a,k)] for different
-c	orientation angles theta : cos (theta)=(ak)/|a||k|
+c	orientation angles theta : cos (theta)=(a*k)/|a||k|
 c	NOTE: M_max is actual M that ensures ERR_Q accuracy of calculations
 	call qQesa(AL,Mmax,N,Z,A1,A2,Qext,Qsca,Qabs,
      +           QexE,QexM,QscE,QscM,QabE,QabM,ERR_Q,M_max)
@@ -939,7 +937,7 @@ C  Subroutine for T-matrix calculation
 c      We consider an axilly symmetrical particle (a,b,b)
 c      Three csaes are included:
 c  Nshape=1  spheroid
-c            semiaxis (a,b,b), epsiln=b/a
+c            semiaxes (a,b,b), epsiln=b/a
 c  Nshape=2  right circular cylinder
 c            length = 2a, and radius = b, epsiln = b/a
 c  Nshape=3  cylinder with semi-spherical ends,
@@ -995,15 +993,15 @@ c	Calculation of the angular functions Q[m,m+n-1] and S[m,m+n-1]
 C------------------------------------------------------------
         CALL qQSM(M,NM,Z)
 C------------------------------------------------------------
-c      We consider an axilly symmetrical particle (a,b,b)
+c      We consider an axially symmetrical particle (a,b,b)
 c  Nshape=1  spheroid: length aL=2*a, thickness d=2*b
 c            semiaxis (a,b,b), a is rotation axis
 c		   eqivolume radius = b*(a/b)**(1/3)
-c            axis ratio e=a/b (<1 or >1), epsiln=b/a (>1 or <1)
+c            aspect ratio e=a/b (<1 or >1), epsiln=b/a (>1 or <1)
 c
 c  Nshape=2  right circular cylinder
-c            length aL= 2a, and thickness d=2*b (rotation axis), 
-c            axis ratio e=a/b (<1 or >1), epsiln = (b/a >1 or <1
+c            length aL= 2a(rotation axis),  and thickness d=2*b 
+c            aspect ratio e=a/b (<1 or >1), epsiln = (b/a >1 or <1
 c		   eqivolume radius = b*[(3a/2b)]**(1/3)
 c
 c  Nshape=3  PROLATE s-cylinder with semi-spherical ends,
