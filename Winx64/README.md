@@ -2,6 +2,23 @@ T-matrix-abs-host
 FORTRAN T-matrix code for particles in absorbing media, dielectric hosts are available
 Program       qCQ-3  (NGauss<=192)
 
+This code was developed by Nikolai G. Khlebtsov during 1987-2022.
+The formulation for particles in absorbing media is given in JQRT paper
+
+Nikolai G. Khlebtsov,  Extinction and scattering of light by nonspherical particles in absorbing media
+JQSRT, 2022, https://doi.org/10.1016/j.jqsrt.2022.108069
+
+ I would highly appreciate the proper citation and informing me of any problems encountered 
+ with this code.  Please send your message to the following         
+ e-mail address:  khlebtsov@ibppm.ru                              
+
+ WHILE THE COMPUTER PROGRAM HAS BEEN TESTED FOR A VARIETY OF CASES,
+ IT IS NOT INCONCEIVABLE THAT IT CONTAINS UNDETECTED ERRORS. ALSO,
+ INPUT PARAMETERS CAN BE USED WHICH ARE OUTSIDE THE ENVELOPE OF
+ VALUES FOR WHICH RESULTS ARE COMPUTED ACCURATELY. FOR THIS REASON,
+ THE AUTHOR AND MY ORGANIZATION DISCLAIM ALL LIABILITY FOR
+ ANY DAMAGES THAT MAY RESULT FROM THE USE OF THE PROGRAM.  
+
 This code is an extended precision version of CQ-3.for 
 with double precision T-matrix calculations
 Calculation of the light scattering cross sections Qext,sca,abs
@@ -56,7 +73,7 @@ The averaged aspect ratio equals e_aver = L_aver/d_aver,
 where d_aver=(d+d1)/2  is the AVERAGED diameter
 For calculations we have used also
 epsiln=1/e e=q/b=L/d d=2b is the CENTRAL diameter
-For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317â€“6323
+For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317–6323
 NOTES
 NOTE1: par_hi must be less than 0.5
 NOTE2: if Nshape=3 par_c and par_hi will be used incorrectly
