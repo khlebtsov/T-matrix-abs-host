@@ -6620,7 +6620,7 @@ C--------------------------------------------------------
       IMPLICIT REAL*8(A-H,O-Z)
       REAL*8 MN,MK
       DIMENSION XN(100),YN(100),MN(100),XK(100),YK(100),MK(100)
-
+	real*16 wavel, Rm
 	complex*32 ref,eps
 	complex*16 epsb,Deps,im
 C--------------------------------------------------------
