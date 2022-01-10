@@ -1,13 +1,24 @@
+C                                                                  
+C                 Program      CQ-3            
+C                                                                 
+C  This code is a double precision version of qCQ-3.for 
+c   with double precision T-matrix calculations
+c  This code was developed by Nikolai G. Khlebtsov during 1987-2022.
+c  The formulation for particles in absorbing media is given in JQSRT paper
+c  Nikolai G. Khlebtsov,  Extinction and scattering of light by nonspherical particles in absorbing media
+c  JQSRT, 2022, https://doi.org/10.1016/j.jqsrt.2022.108069
 c
-C|                 Program       qCQ-3   (NGauss max=768)          
-C|                                                                  
-C|  This code is an double precision version of qCQ-3.for 
+c   I would highly appreciate the proper citation and informing me of any problems encountered 
+c   with this code.  Please send your message to the following         
+c   e-mail address:  khlebtsov@ibppm.ru                              
 c
-C   Calculation of the light scattering cross sections Qext,sca,abs
-c   for randomly oriented MONODISPERSE particles (rods and disks)
-c   In addition, the orientation averaged Scattering matrix Fij(beta_sca)
-c   and derivative parameters Ivv, Itot, Ivh/Ivv are calculated at a wixed wavelength
-c   for Details see Khlebtsov, JQSRT, 2022.	
+c  WHILE THE COMPUTER PROGRAM HAS BEEN TESTED FOR A VARIETY OF CASES,
+c  IT IS NOT INCONCEIVABLE THAT IT CONTAINS UNDETECTED ERRORS. ALSO,
+c  INPUT PARAMETERS CAN BE USED WHICH ARE OUTSIDE THE ENVELOPE OF
+c  VALUES FOR WHICH RESULTS ARE COMPUTED ACCURATELY. FOR THIS REASON,
+c  THE AUTHOR AND MY ORGANIZATION DISCLAIM ALL LIABILITY FOR
+c  ANY DAMAGES THAT MAY RESULT FROM THE USE OF THE PROGRAM.  
+c
 c   In addition to orientation-averaged cross sections,
 c   Qext,sca,abs(theta) , and the forward scattering amplitudes
 c    A11(0)=A1, A22(0)=A2   are calculated for TE and TM
