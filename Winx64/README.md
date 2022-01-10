@@ -56,7 +56,7 @@ The averaged aspect ratio equals e_aver = L_aver/d_aver,
 where d_aver=(d+d1)/2  is the AVERAGED diameter
 For calculations we have used also
 epsiln=1/e e=q/b=L/d d=2b is the CENTRAL diameter
-For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317–6323
+For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317â€“6323
 NOTES
 NOTE1: par_hi must be less than 0.5
 NOTE2: if Nshape=3 par_c and par_hi will be used incorrectly
