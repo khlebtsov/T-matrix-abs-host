@@ -156,8 +156,4 @@ c	the tolerance error parameters for the efficiencies and the amplitude matrix
 c	The number of Gauss points in the T-matrix quadratures
 	NI=1
 c	The number of subintervals in the T-matrix integrals. Here NI is set to be 1
-
 C--------------------------------------------------------
-
-
-
