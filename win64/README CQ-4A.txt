@@ -1,6 +1,6 @@
 T-matrix-abs-host
 C                                                                  
-C                 Program       qCQ-4.for   (NGauss<=192)           
+C                 Program       qCQ-4A.for   (NGauss<=192)           
 c****
 C	In this version, the complex (constant) refractive indexes of medium (n1) and particles (n2)
 c	can be defined in the parameter file QC-4A.par                                                            
@@ -82,7 +82,7 @@ c		   The averaged aspect ratio equals e_aver = L_aver/d_aver,
 c		   where d_aver=(d+d1)/2  is the AVERAGED diameter
 c		   For calculations we have used also
 c		   epsiln=1/e e=q/b=L/d d=2b is the CENTRAL diameter
-c		   For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317–6323
+c		   For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317â€“6323
 c		!!!!!!!!
 c             NOTE1: par_hi must be less than 0.5
 c			NOTE2: if Nshape=3 par_c and par_hi will be used incorrectly
@@ -139,7 +139,7 @@ c	Nmetal=0 for Ag and 1 for Au
 c	if NAu=1 or 2 the Olmon or g34JCH3 splines are used, respectively 
 	read(14,*) par_c,par_hi
 c	The shape parameters for Nshape=4 case
-c     For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317–6323
+c     For details, see Khlebtsov et al.,J. Phys. Chem. C 2011, 115, 6317â€“6323
       read(14,*) Norient,Ntheta
 c	Norient is the number of orientation points for averaging
 c     FSrandom(i,j) FLrandom(i,j) 4x4 matrixes over ZU=cos(Theta_u) and HI
