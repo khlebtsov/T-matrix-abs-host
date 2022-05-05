@@ -2,6 +2,7 @@ C
 C                 Program       qCQ-4A.for   (NGauss<=192)           
 c****
 C	A new subroutine qRTFW1 has been implemented in a previous qCQ-3A version                                                                 
+c	A new cq-4A.par file is used instead of previous cq-4.par
 c*****
 C  This code is an extended precision version of CQ-4.for 
 c   with double precision T-matrix calculations
@@ -360,7 +361,7 @@ c	Nmetal=0 Ag
 		    call Olmon(wavel,aLeff,n2,eps2,KD,KS)
 			refm=n2/refmed
 		 else
-  			call g34JCh3(wavel,aLeff,n2,eps2,KD)
+  			call g34JCh3(wavel,aLeff,n2,KD)
 			refm=n2/refmed
 		 end if
 	else        
@@ -6776,18 +6777,17 @@ c---------------------------------------------------------------------
 c***************************************
 
 C--------------------------------------------------------
-
-       subroutine g34JCh3(wavel,Rm,ref,eps,KD)
+c     Calculate size-correxted ref and eps
+       subroutine g34JCh3(wavel,Rm,ref,KD)
       IMPLICIT REAL*8(A-H,O-Z)
       REAL*8 MN,MK
       DIMENSION XN(100),YN(100),MN(100),XK(100),YK(100),MK(100)
-	real*16 wavel, Rm
-	complex*32 ref,eps
-	complex*16 epsb,Deps,im
+      real*16 wavel,Rm
+      complex*32 ref
+	complex*16 eps,epsb,Deps,aim
 C--------------------------------------------------------
-c	Rm=aLeff/As !!!!!
-
-c	aim=(0.d0,1.d0)
+c	Rm=aLeff=Rev/As !!!!!
+	aim=(0.d0,1.d0)
 
 c     
       xx=wavel
@@ -7201,14 +7201,14 @@ c      Step 3: Recalculation of tefre and refim: Bohren-Huffman, p.281
        refre=dsqrt((dsqrt(eps1**2.d0+eps2**2.d0)+eps1)/2.d0)
        refim=dsqrt((dsqrt(eps1**2.d0+eps2**2.d0)-eps1)/2.d0)
 
-	im=(0.d0,1.d0)
-	eps=eps1+im*eps2
-	ref=refre+im*refim
+	 ref=refre+aim*refim
 
 c---------------------------------------------------------------------
        RETURN
        END
 c************************************************************************
+
+
 c***************************************************************
 c           subroutine P3HT2020DF(wavel,ref,eps) 2021
 c	Hrostea et al.Coatings 2020, MDPI New formula Khlebtsov JQSRT, 2022
